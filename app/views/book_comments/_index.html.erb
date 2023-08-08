@@ -1,0 +1,24 @@
+<div class="card-list-container">  
+  <% @book.book_comments.each do |comment| %>
+    <div class="card w-100, mb-1">
+      <div class="card-header p-1">
+         <%= image_tag comment.user.get_profile_image(50,50), class:"rounded-circle" %>
+         <strong><%= comment.user.name %></strong>
+      </div>
+      <div class="card-body py-0">
+        <div class="row">
+          <div class="col-10 p-1">
+            <p><%= comment.comment %></p>
+          </div>
+          <div class="col-2 p-0 text-right">
+            <% if comment.user_id == current_user.id %>
+              <%= link_to (book_book_comment_path(comment.book, comment)), method: :delete, class:"btn" do %>
+              <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
